@@ -1,4 +1,4 @@
-var getMouseInnerClientPosition, getMousePagePosition, i = 0, isPaused = false, mouseMove = false;
+var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = false, mouseMove = false;
 var userBehaviourFromOnload = [];
 function getScrollPosition() {
     return {
@@ -21,6 +21,14 @@ addEventListener('mousemove', mouseMoveEvent, false)
 addEventListener('wheel', mouseMoveEvent, false)
 document.body.addEventListener('touchmove', mouseMoveEvent, false)
 
+$('#mouseMove').on('click', function (e) {
+    mouseClick = {
+        x: e.pageX,
+        y: e.pageY
+    };
+    console.log(mouseClick)
+});
+
 function getScreenSize() {
     return {
         x : screen.width,
@@ -35,18 +43,14 @@ function getViewPortSize() {
     }
 }
 
-
-
 $('#mouseMove').mouseenter(function(e){
     e.preventDefault();
     mouseMove = false;
-    console.log("mouse Enter");
 })
 
 $('#mouseMove').mouseleave(function(e){
     e.preventDefault();
     mouseMove = true;
-    console.log("mouse Leave");
 })
 
 $(document).ready(function() {
@@ -57,7 +61,8 @@ $(document).ready(function() {
                 "mousePageBehaviour": getMousePagePosition,
                 "screenSize": getScreenSize(),
                 "scrollPosition": getScrollPosition(),
-                "viewPortSize": getViewPortSize()
+                "viewPortSize": getViewPortSize(),
+                "mouseClickLocation": mouseClick,
             }
             console.log(userBehaviour)
             userBehaviourFromOnload.push(userBehaviour)
@@ -72,6 +77,13 @@ window.setInterval(function() {
             'left' : userBehaviourFromOnload[i].mousePageBehaviour.x + 'px'
         });
         window.scrollTo(userBehaviourFromOnload[i].scrollPosition.x, userBehaviourFromOnload[i].scrollPosition.y);
+        // $('#mouseMoveMap').css({
+        //     'top' : userBehaviourFromOnload[i].mouseClickLocation.y + 'px',
+        //     'left' : userBehaviourFromOnload[i].mouseClickLocation.x + 'px',
+        //     'background-color': 'yellow',
+        //     'height': '5px',
+        //     'width': '5px'
+        // })
         i++;
     }
 }, 100);
