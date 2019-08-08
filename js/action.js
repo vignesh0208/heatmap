@@ -1,4 +1,4 @@
-var getMouseInnerClientPosition, getMousePagePosition, i = 0, isPaused = false;
+var getMouseInnerClientPosition, getMousePagePosition, i = 0, isPaused = false, mouseMove = false;
 var userBehaviourFromOnload = [];
 function getScrollPosition() {
     return {
@@ -36,17 +36,32 @@ function getViewPortSize() {
 }
 
 
-$(document).mouseenter(function() {
+
+$('#mouseMove').mouseenter(function(e){
+    e.preventDefault();
+    mouseMove = false;
+    console.log("mouse Enter");
+})
+
+$('#mouseMove').mouseleave(function(e){
+    e.preventDefault();
+    mouseMove = true;
+    console.log("mouse Leave");
+})
+
+$(document).ready(function() {
     setInterval(function() {
-        var userBehaviour = {
-            "mouseInnerBehaviour": getMouseInnerClientPosition,
-            "mousePageBehaviour": getMousePagePosition,
-            "screenSize": getScreenSize(),
-            "scrollPosition": getScrollPosition(),
-            "viewPortSize": getViewPortSize()
+        if(!mouseMove) {
+            var userBehaviour = {
+                "mouseInnerBehaviour": getMouseInnerClientPosition,
+                "mousePageBehaviour": getMousePagePosition,
+                "screenSize": getScreenSize(),
+                "scrollPosition": getScrollPosition(),
+                "viewPortSize": getViewPortSize()
+            }
+            console.log(userBehaviour)
+            userBehaviourFromOnload.push(userBehaviour)
         }
-        console.log(userBehaviour)
-        userBehaviourFromOnload.push(userBehaviour)
     }, 100);
 })
 
