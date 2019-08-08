@@ -1,4 +1,4 @@
-var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = false, mouseMove = false;
+var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = false, mouseMove = false, x= 0, y= 0;
 var userBehaviourFromOnload = [];
 function getScrollPosition() {
     return {
@@ -74,16 +74,15 @@ window.setInterval(function() {
     if(!isPaused) {
         $('#mouse-pointer').css({
             'top' : userBehaviourFromOnload[i].mousePageBehaviour.y + 'px',
-            'left' : userBehaviourFromOnload[i].mousePageBehaviour.x + 'px'
+            'left' : userBehaviourFromOnload[i].mousePageBehaviour.x + 'px',
+            'border':'solid 1px #f4623a',
+            'border-radius':'20px',
+            'width':'17px',
+            'height':'17px',
+            'background-color': 'white',
+            'cursor': 'pointer'
         });
         window.scrollTo(userBehaviourFromOnload[i].scrollPosition.x, userBehaviourFromOnload[i].scrollPosition.y);
-        // $('#mouseMoveMap').css({
-        //     'top' : userBehaviourFromOnload[i].mouseClickLocation.y + 'px',
-        //     'left' : userBehaviourFromOnload[i].mouseClickLocation.x + 'px',
-        //     'background-color': 'yellow',
-        //     'height': '5px',
-        //     'width': '5px'
-        // })
         i++;
     }
 }, 100);
