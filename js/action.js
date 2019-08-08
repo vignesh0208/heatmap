@@ -1,5 +1,6 @@
-var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = false, mouseMove = false, x= 0, y= 0;
+var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = true, mouseMove = false, x= 0, y= 0;
 var userBehaviourFromOnload = [];
+
 function getScrollPosition() {
     return {
         x: window.pageXOffset,
@@ -53,7 +54,7 @@ $('#mouseMove').mouseleave(function(e){
     mouseMove = true;
 })
 
-$(document).ready(function() {
+$(document).mouseenter(function() {
     setInterval(function() {
         if(!mouseMove) {
             var userBehaviour = {
@@ -87,12 +88,12 @@ window.setInterval(function() {
     }
 }, 100);
 
-$('#pause').on('click', function(e) {
-    e.preventDefault();
-    isPaused = true;
-});
-
 $('#play').on('click', function(e) {
     e.preventDefault();
     isPaused = false;
+});
+
+$('#pause').on('click', function(e) {
+    e.preventDefault();
+    isPaused = true;
 });
