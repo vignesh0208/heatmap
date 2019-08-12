@@ -1,6 +1,8 @@
 var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = true, mouseMove = false;
 var userBehaviourFromOnload = [];
+var timeDuration = []
 
+// Get scroll position
 function getScrollPosition() {
     return {
         x: window.pageXOffset,
@@ -8,6 +10,7 @@ function getScrollPosition() {
     }
 }
 
+// Mouse move event
 function mouseMoveEvent(e) {
     getMouseInnerClientPosition = {
         x: e.clientX,
@@ -20,8 +23,9 @@ function mouseMoveEvent(e) {
 }
 addEventListener('mousemove', mouseMoveEvent, false)
 addEventListener('wheel', mouseMoveEvent, false)
-document.body.addEventListener('touchmove', mouseMoveEvent, false)
+document.body.addEventListener('touchmove', mouseMoveEvent, false) //for mobile device
 
+//Mouse click position
 $('#mouseMove').on('click', function (e) {
     mouseClick = {
         x: e.pageX,
@@ -29,6 +33,7 @@ $('#mouseMove').on('click', function (e) {
     };
 });
 
+//Device screen size
 function getScreenSize() {
     return {
         x : screen.width,
@@ -36,6 +41,7 @@ function getScreenSize() {
     } 
 }
 
+//Port screen size
 function getViewPortSize() {
     return {
         x : window.innerWidth,
@@ -60,14 +66,17 @@ $(document).mouseenter(function() {
                 "viewPortSize": getViewPortSize(),
                 "mouseClickLocation": mouseClick,
             }
-            // console.log(userBehaviour);
             userBehaviourFromOnload.push(userBehaviour);
+            // console.log(userBehaviourFromOnload)
         }
     }, 100);
+    if (!mouseMove) {
+        
+    }
 })
 
 window.setInterval(function() {
-    if(!isPaused) {
+    if(!isPaused && (userBehaviourFromOnload.length >= (i+1))) {
         $('#mouse-pointer').css({
             'top' : userBehaviourFromOnload[i].mousePageBehaviour.y + 'px',
             'left' : userBehaviourFromOnload[i].mousePageBehaviour.x + 'px',
@@ -76,7 +85,8 @@ window.setInterval(function() {
             'width':'17px',
             'height':'17px',
             'background-color': 'white',
-            'cursor': 'pointer'
+            'cursor': 'pointer',
+            'position': 'absolute'
         });
         window.scrollTo(userBehaviourFromOnload[i].scrollPosition.x, userBehaviourFromOnload[i].scrollPosition.y);
         i++;
