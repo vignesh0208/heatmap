@@ -51,7 +51,14 @@ app.get('/about', function(req, res){
 
 app.get('/heatmap', function(req, res){
   res.render('heatmap.html', {
-    title: Config['SEO']['About']['title'],
+    title: Config['SEO']['Heatmap']['title'],
+    page: 'about',
+  });
+});
+
+app.get('/mousemove', function(req, res){
+  res.render('mouse-move-map.html', {
+    title: Config['SEO']['MouseMove']['title'],
     page: 'about',
   });
 });

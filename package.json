@@ -39,7 +39,8 @@
     "jquery": "3.4.1",
     "jquery.easing": "^1.4.1",
     "magnific-popup": "^1.1.0",
-    "nunjucks": "^3.2.0"
+    "nunjucks": "^3.2.0",
+    "record-screen": "^3.10.0"
   },
   "devDependencies": {
     "browser-sync": "2.26.7",

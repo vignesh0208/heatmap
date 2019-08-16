@@ -5,6 +5,12 @@ var Config = {
         },
         About: {
             title: 'About us page',
+        },
+        Heatmap: {
+            title: 'Heatmap page'
+        },
+        MouseMove: {
+            title: 'Mouse Move Headmap page'
         }
     }
 }

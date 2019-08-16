@@ -33,7 +33,7 @@ $('#mouseMove').on('click', function (e) {
     };
     // console.log(mouseClick)
     mouseClickLocation.push(mouseClick);
-    console.log(mouseClickLocation)
+    // console.log(mouseClickLocation)
 });
 
 //Device screen size
@@ -70,7 +70,6 @@ $(document).mouseenter(function() {
                 // "mouseClickLocation": mouseClick,
             }
             userBehaviourFromOnload.push(userBehaviour);
-            // console.log(userBehaviourFromOnload)
         }
     }, 100);
 })
@@ -89,7 +88,7 @@ window.setInterval(function() {
             'position': 'absolute'
         });
         window.scrollTo(userBehaviourFromOnload[i].scrollPosition.x, userBehaviourFromOnload[i].scrollPosition.y);
-        // console.log(mouseClickLocation[i].x, mouseClickLocation[i].y)
+        console.log(userBehaviourFromOnload[i].mousePageBehaviour);
         i++;
     }
 }, 100);
