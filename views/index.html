@@ -23,6 +23,10 @@
   <!-- Theme CSS - Includes Bootstrap -->
   <link href="/public/css/creative.min.css" rel="stylesheet">
 
+  <!--Google map API-->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDVfS6zRlHJRRhCJy_3gDOUEIUMZe7qns"
+  type="text/javascript"></script>
+
   <style>
   figure#mouse-pointer {
     position: absolute;
@@ -33,6 +37,10 @@
     width:100%; 
     height:100%;
     position: absolute;
+  }
+  #map {
+    width: 500px;
+    height: 300px;
   }
   </style>
 
@@ -264,6 +272,15 @@
       <div class="small text-center text-muted">Copyright &copy; 2019 - Start Bootstrap</div>
     </div>
   </footer>
+
+  <div>
+    <p>{{ info.hostName }}</p>
+    <p>{{ info.Type }}</p>
+    <p>{{ info.Arch }}</p>
+    <p>{{ info.CPUS[0].model }}</p>
+    <p>{{ info.network.wlx502b73d46835[0].address }}</p>
+  </div>
+  <div id="map"></div>
 
   <!-- Bootstrap core JavaScript -->
   <script src="/public/vendor/jquery/jquery.min.js"></script>

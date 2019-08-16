@@ -120,3 +120,28 @@ $('#pause').on('click', function(e) {
     e.preventDefault();
     isPaused = true;
 });
+
+// Google map
+var geo = navigator.geolocation;
+geo.getCurrentPosition(success);
+function success(position) {
+    var myLat = position.coords.latitude;
+    var myLong = position.coords.longitude;
+    var coords = new google.maps.LatLng(myLat, myLong);
+    var mapOption = {
+        center: coords,
+        zoom: 15,
+        panControl:false,
+        zoomControl:false,
+        mapTypeControl:false,
+        scaleControl:false,
+        streetViewControl:false,
+        overviewMapControl:false,
+        rotateControl:false,
+        draggable: false,
+        fullscreenControl: false,
+        mapTypeId:google.maps.MapTypeId.ROADMAP
+    }
+    var map = new google.maps.Map(document.getElementById('map'), mapOption);
+    var marker = new google.maps.Marker({map: map, position:coords});
+}
