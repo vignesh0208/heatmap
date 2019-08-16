@@ -29,7 +29,7 @@ var infoValue = {
 
 var ip = "207.97.227.239";
 var geo = geoip.lookup(ip);
-console.log(geo)
+// console.log(geo)
 
 // console.log(infoValue.CPUS[0].model)
 // console.log(infoValue.network.wlx502b73d46835[0].address)
@@ -47,6 +47,13 @@ app.get('/about', function(req, res){
       title: Config['SEO']['About']['title'],
       page: 'about',
     });
+});
+
+app.get('/heatmap', function(req, res){
+  res.render('heatmap.html', {
+    title: Config['SEO']['About']['title'],
+    page: 'about',
+  });
 });
 
 app.listen(port, function() {

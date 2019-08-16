@@ -1,12 +1,6 @@
 var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = true, mouseMove = false, j= 0;
 var userBehaviourFromOnload = [];
 var mouseClickLocation = [];
-var heatmap = h337.create({
-    container: document.getElementById('mouseMove'),
-    maxOpacity: .6,
-    radius: 50,
-    blur: .90,
-});
 
 // Get scroll position
 function getScrollPosition() {
@@ -37,8 +31,8 @@ $('#mouseMove').on('click', function (e) {
         x: e.pageX,
         y: e.pageY
     };
+    // console.log(mouseClick)
     mouseClickLocation.push(mouseClick);
-    console.log(mouseClick)
     console.log(mouseClickLocation)
 });
 
@@ -76,7 +70,7 @@ $(document).mouseenter(function() {
                 // "mouseClickLocation": mouseClick,
             }
             userBehaviourFromOnload.push(userBehaviour);
-            console.log(userBehaviourFromOnload)
+            // console.log(userBehaviourFromOnload)
         }
     }, 100);
 })
@@ -97,17 +91,6 @@ window.setInterval(function() {
         window.scrollTo(userBehaviourFromOnload[i].scrollPosition.x, userBehaviourFromOnload[i].scrollPosition.y);
         // console.log(mouseClickLocation[i].x, mouseClickLocation[i].y)
         i++;
-    }
-}, 100);
-
-window.setInterval(function() {
-    if(!mouseMove && (mouseClickLocation.length >= (j+1))) {
-        heatmap.addData({ 
-            x: mouseClickLocation[j].x,
-            y: mouseClickLocation[j].y,
-            value: 1
-        });
-        j++;
     }
 }, 100);
 

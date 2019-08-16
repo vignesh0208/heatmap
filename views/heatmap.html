@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Heat Map</title>
+    <!-- <script src="/public/js/action.js"></script> -->
+</head>
+<body>
+    <div id="heatmap" style="position: relative; width: 100%; height: 3294px; background-image: url(http://localhost:3000/public/img/index.png)"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/public/js/heatmap.js"></script>
+    <script>
+        var j= 0;
+        var mouseClickLocation = [
+            {x: 1107, y: 401},
+            {x: 1107, y: 928},
+            {x: 1107, y: 1494},
+            {x: 672, y: 1443},
+            {x: 672, y: 2706},
+            {x: 120, y: 2654},
+            {x: 116, y: 3364},
+            {x: 720, y: 2644},
+            {x: 168, y: 2620},
+            {x: 167, y: 2152},
+            {x: 972, y: 2132},
+            {x: 963, y: 1447},
+            {x: 963, y: 606},
+            {x: 963, y: 135}
+        ]
+        var heatmapInstance = h337.create({
+            container: document.getElementById('heatmap'),
+            maxOpacity: .6,
+            radius: 50,
+            blur: .90,
+        });
+
+        window.setInterval(function() {
+            if(mouseClickLocation.length >= (j+1)) {
+                heatmapInstance.addData({ 
+                    x: mouseClickLocation[j].x,
+                    y: mouseClickLocation[j].y,
+                    value: 1
+                });
+                j++;
+            }
+        }, 100);
+    </script>
+</body>
+</html>
