@@ -1,4 +1,4 @@
-var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = true, mouseMove = false, j= 0;
+var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = true, mouseMove = false, j= 0, counter= 0;
 var userBehaviourFromOnload = [];
 var mouseClickLocation = [];
 
@@ -62,13 +62,15 @@ $(document).mouseenter(function() {
     setInterval(function() {
         if(!mouseMove) {
             var userBehaviour = {
+                "Timing": counter,
                 "mouseInnerBehaviour": getMouseInnerClientPosition,
                 "mousePageBehaviour": getMousePagePosition,
                 "screenSize": getScreenSize(),
                 "scrollPosition": getScrollPosition(),
                 "viewPortSize": getViewPortSize(),
-                // "mouseClickLocation": mouseClick,
             }
+            counter++
+            console.log(counter);
             userBehaviourFromOnload.push(userBehaviour);
         }
     }, 100);
