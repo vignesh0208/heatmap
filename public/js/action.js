@@ -1,4 +1,4 @@
-var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = true, mouseMove = false, j= 0, counter= 0;
+var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = true, mouseMove = false, j= 0, counter= 0, timingValue;
 var userBehaviourFromOnload = [];
 var mouseClickLocation = [];
 
@@ -105,13 +105,13 @@ $('#play').on('click', function(e) {
     minute = minute % 60;
     day = Math.floor(hour / 24);
     hour = hour % 24;
-    var timing = {
+    timingValue = {
         day: day,
         hour: hour,
         minute: minute,
         seconds: seconds,
     };
-    console.log(timing)
+    console.log(timingValue)
 });
 
 $('#pause').on('click', function(e) {
