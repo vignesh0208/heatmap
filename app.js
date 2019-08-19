@@ -42,13 +42,6 @@ app.get('/', (req, res) => {
   });    
 });
 
-app.get('/about', function(req, res){
-    res.render('pages/about.html', {
-      title: Config['SEO']['About']['title'],
-      page: 'about',
-    });
-});
-
 app.get('/heatmap', function(req, res){
   res.render('heatmap.html', {
     title: Config['SEO']['Heatmap']['title'],
@@ -64,5 +57,5 @@ app.get('/mousemove', function(req, res){
 });
 
 app.listen(port, function() {
-    console.log('Example app listening on port... http://localhost:'+ port +'');
+  console.log('Example app listening on port... http://localhost:'+ port +'');
 });

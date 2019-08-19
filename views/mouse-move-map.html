@@ -10,8 +10,8 @@
     </style>
 </head>
 <body>
-    <div id="heatmap" style="position: relative; width: 100%; height: 100%;">
-        <img src="/public/img/index.png">
+    <div id="heatmap" style="position: relative; width: 50%; height: 100%;">
+        <img src="/public/img/index.png" style="width: 100%; height: 50%;">
     </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -55,15 +55,17 @@
             var heatmapInstance = h337.create({
                 container: document.getElementById('heatmap'),
                 maxOpacity: .6,
-                radius: 50,
+                radius: 25,
                 blur: .90
             });
 
             window.setInterval(function() {
                 if(mouseClickLocation.length >= (j+1)) {
+                    var mouseX= mouseClickLocation[j].x;
+                    var mouseY= mouseClickLocation[j].y;
                     heatmapInstance.addData({ 
-                        x: mouseClickLocation[j].x,
-                        y: mouseClickLocation[j].y,
+                        x: mouseX/2,
+                        y: mouseY/2,
                         value: 1
                     });
                     j++;

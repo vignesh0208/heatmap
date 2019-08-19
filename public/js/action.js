@@ -70,7 +70,6 @@ $(document).mouseenter(function() {
                 "viewPortSize": getViewPortSize(),
             }
             counter++
-            console.log(counter);
             userBehaviourFromOnload.push(userBehaviour);
         }
     }, 100);
@@ -90,10 +89,18 @@ window.setInterval(function() {
             'position': 'absolute'
         });
         window.scrollTo(userBehaviourFromOnload[i].scrollPosition.x, userBehaviourFromOnload[i].scrollPosition.y);
-        console.log(userBehaviourFromOnload[i].mousePageBehaviour);
+        // console.log(userBehaviourFromOnload[i].mousePageBehaviour);
+        var millis= userBehaviourFromOnload.length;
+        console.log(millis);
         i++;
     }
 }, 100);
+
+// function millisToMinutesAndSeconds(millis) {
+//     var minutes = Math.floor(millis / 60000);
+//     var seconds = ((millis % 60000) / 1000).toFixed(0);
+//     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+// }
 
 $('#play').on('click', function(e) {
     e.preventDefault();
