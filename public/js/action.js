@@ -31,9 +31,7 @@ $('#mouseMove').on('click', function (e) {
         x: e.pageX,
         y: e.pageY
     };
-    // console.log(mouseClick)
     mouseClickLocation.push(mouseClick);
-    // console.log(mouseClickLocation)
 });
 
 //Device screen size
@@ -90,21 +88,30 @@ window.setInterval(function() {
         });
         window.scrollTo(userBehaviourFromOnload[i].scrollPosition.x, userBehaviourFromOnload[i].scrollPosition.y);
         // console.log(userBehaviourFromOnload[i].mousePageBehaviour);
-        var millis= userBehaviourFromOnload.length;
-        console.log(millis);
         i++;
     }
 }, 100);
 
-// function millisToMinutesAndSeconds(millis) {
-//     var minutes = Math.floor(millis / 60000);
-//     var seconds = ((millis % 60000) / 1000).toFixed(0);
-//     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-// }
-
 $('#play').on('click', function(e) {
     e.preventDefault();
     isPaused = false;
+    var fun = userBehaviourFromOnload.length * 100;
+    var milliseconds = fun;
+    var day, hour, minute, seconds;
+    seconds = Math.floor(milliseconds / 1000);
+    minute = Math.floor(seconds / 60);
+    seconds = seconds % 60;
+    hour = Math.floor(minute / 60);
+    minute = minute % 60;
+    day = Math.floor(hour / 24);
+    hour = hour % 24;
+    var timing = {
+        day: day,
+        hour: hour,
+        minute: minute,
+        seconds: seconds,
+    };
+    console.log(timing)
 });
 
 $('#pause').on('click', function(e) {
