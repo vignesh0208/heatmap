@@ -1,7 +1,15 @@
 var getMouseInnerClientPosition, getMousePagePosition, mouseClick, i = 0, isPaused = true, mouseMove = false, j= 0, counter= 0, timingValue;
 var userBehaviourFromOnload = [];
 var mouseClickLocation = [];
+var dataValue= [];
 
+$(document).ready(function () {
+    $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+        dataValue.push(data);
+    });
+});
+
+console.log(dataValue)
 // Get scroll position
 function getScrollPosition() {
     return {
@@ -120,26 +128,33 @@ $('#pause').on('click', function(e) {
 });
 
 // Google map
-var geo = navigator.geolocation;
-geo.getCurrentPosition(success);
-function success(position) {
-    var myLat = position.coords.latitude;
-    var myLong = position.coords.longitude;
-    var coords = new google.maps.LatLng(myLat, myLong);
-    var mapOption = {
-        center: coords,
-        zoom: 15,
-        panControl:false,
-        zoomControl:false,
-        mapTypeControl:false,
-        scaleControl:false,
-        streetViewControl:false,
-        overviewMapControl:false,
-        rotateControl:false,
-        draggable: false,
-        fullscreenControl: false,
-        mapTypeId:google.maps.MapTypeId.ROADMAP
+function success() {
+    var latlng = new google.maps.LatLng(dataValue[0].geobyteslatitude, dataValue[0].geobyteslongitude)
+    var mapProp = {
+      center: latlng,
+      zoom: 15,
+      panControl:false,
+      zoomControl:false,
+      mapTypeControl:false,
+      scaleControl:false,
+      streetViewControl:false,
+      overviewMapControl:false,
+      rotateControl:false,
+      draggable: false,
+      fullscreenControl: false,
+      mapTypeId:google.maps.MapTypeId.ROADMAP
     }
-    var map = new google.maps.Map(document.getElementById('map'), mapOption);
-    var marker = new google.maps.Marker({map: map, position:coords});
+    this.map = new google.maps.Map(document.getElementById('map'), mapProp);
+    var marker = new google.maps.Marker({
+      position:latlng,
+    });
+    marker.setMap(this.map);
+    var geocoder = geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        if (results[1]) {
+          this.locationAddress = results[1].formatted_address;
+        }
+      }
+    });
 }

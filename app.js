@@ -2,6 +2,7 @@ var Config = require('./config.js');
 var express = require ('express');
 var nunjucks  = require('nunjucks');
 var geoip = require('geoip-lite');
+const browser = require('browser-detect');
 var port = 3000;
 var app = express();
 app.use('/public', express.static('public'));
@@ -35,10 +36,12 @@ var geo = geoip.lookup(ip);
 // console.log(infoValue.network.wlx502b73d46835[0].address)
 
 app.get('/', (req, res) => {
+  const result = browser(req.headers['user-agent']);
   res.render('index.html', {
     title: Config['SEO']['Home']['title'],
     page: 'home',
-    info: infoValue
+    info: infoValue,
+    browserValue: result
   });    
 });
 

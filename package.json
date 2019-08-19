@@ -32,6 +32,7 @@
     "@ffmpeg-installer/ffmpeg": "^1.0.19",
     "@fortawesome/fontawesome-free": "5.9.0",
     "bootstrap": "4.3.1",
+    "browser-detect": "^0.2.28",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "ffmpeg": "0.0.4",
