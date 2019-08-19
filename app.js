@@ -45,14 +45,21 @@ app.get('/', (req, res) => {
 app.get('/heatmap', function(req, res){
   res.render('heatmap.html', {
     title: Config['SEO']['Heatmap']['title'],
-    page: 'about',
+    page: 'heatmap',
   });
 });
 
 app.get('/mousemove', function(req, res){
   res.render('mouse-move-map.html', {
     title: Config['SEO']['MouseMove']['title'],
-    page: 'about',
+    page: 'mousemove',
+  });
+});
+
+app.get('/googleanalytics', function(req, res){
+  res.render('google-analytics.html', {
+    title: Config['SEO']['Google']['title'],
+    page: 'googleanalytics',
   });
 });
 

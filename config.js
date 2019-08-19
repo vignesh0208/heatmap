@@ -11,6 +11,9 @@ var Config = {
         },
         MouseMove: {
             title: 'Mouse Move Headmap page'
+        },
+        Google: {
+            title: 'Google analytics'
         }
     }
 }
