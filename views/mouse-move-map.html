@@ -33,6 +33,8 @@
             {x: 323, y: 218},
             {x: 392, y: 222},
             {x: 1050, y: 219},
+            {x: 1050, y: 219},
+            {x: 1050, y: 219},
             {x: 1179, y: 238},
             {x: 1185, y: 238},
             {x: 755, y: 221},
@@ -46,11 +48,21 @@
             {x: 737, y: 75},
             {x: 635, y: 36},
             {x: 599, y: 23},
+            {x: 599, y: 23},
+            {x: 599, y: 23},
             {x: 592, y: 22},
             {x: 590, y: 22},
             {x: 26, y: 281},
             {x: 48, y: 328}
         ]
+        var newArray = [];
+        $.each(mouseClickLocation, function(key, value) {
+            var exists = false;
+            $.each(newArray, function(k, val2) {
+            if((value.x == val2.x) && (value.y == val2.y)){ exists = true };
+            });
+            if(exists == false && ((value.y != "") && (value.x != ""))) { newArray.push(value); }
+        });
         window.onload = function() {
             var heatmapInstance = h337.create({
                 container: document.getElementById('heatmap'),
@@ -60,9 +72,9 @@
             });
 
             window.setInterval(function() {
-                if(mouseClickLocation.length >= (j+1)) {
-                    var mouseX= mouseClickLocation[j].x;
-                    var mouseY= mouseClickLocation[j].y;
+                if(newArray.length >= (j+1)) {
+                    var mouseX= newArray[j].x;
+                    var mouseY= newArray[j].y;
                     heatmapInstance.addData({ 
                         x: mouseX/2,
                         y: mouseY/2,
@@ -72,6 +84,29 @@
                 }
             }, 100);
         };
+        // var myArray = [
+        //     {x: 420, y: 184},
+        //     {x: 420, y: 184},
+        //     {x: 420, y: 184},
+        //     {x: 396, y: 245},
+        //     {x: 353, y: 232},
+        //     {x: 397, y: 245},
+        //     {x: 198, y: 184},
+        //     {x: 396, y: 246},
+        //     {x: 169, y: 184},
+        // ];
+    
+
+        // var newArray = [];
+        // $.each(myArray, function(key, value) {
+        //     var exists = false;
+        //     $.each(newArray, function(k, val2) {
+        //     if((value.x == val2.x) && (value.y == val2.y)){ exists = true };
+        //     });
+        //     if(exists == false && ((value.y != "") && (value.x != ""))) { newArray.push(value); }
+        // });
+        // console.log(newArray)
+    
     </script>
 </body>
 </html>
