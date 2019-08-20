@@ -1,15 +1,15 @@
 var Config = require('./config.js');
-var express = require ('express');
-var nunjucks  = require('nunjucks');
+var express = require('express');
+var nunjucks = require('nunjucks');
 var geoip = require('geoip-lite');
 const browser = require('browser-detect');
 var port = 3000;
 var app = express();
 app.use('/public', express.static('public'));
 
-var env = nunjucks.configure(['views/'], { 
-    autoescape: true, 
-    express: app
+var env = nunjucks.configure(['views/'], {
+  autoescape: true,
+  express: app
 });
 
 var OS = require('os');
@@ -42,30 +42,30 @@ app.get('/', (req, res) => {
     page: 'home',
     info: infoValue,
     browserValue: result
-  });    
+  });
 });
 
-app.get('/heatmap', function(req, res){
+app.get('/heatmap', function (req, res) {
   res.render('heatmap.html', {
     title: Config['SEO']['Heatmap']['title'],
     page: 'heatmap',
   });
 });
 
-app.get('/mousemove', function(req, res){
+app.get('/mousemove', function (req, res) {
   res.render('mouse-move-map.html', {
     title: Config['SEO']['MouseMove']['title'],
     page: 'mousemove',
   });
 });
 
-app.get('/googleanalytics', function(req, res){
+app.get('/googleanalytics', function (req, res) {
   res.render('google-analytics.html', {
     title: Config['SEO']['Google']['title'],
     page: 'googleanalytics',
   });
 });
 
-app.listen(port, function() {
-  console.log('Example app listening on port... http://localhost:'+ port +'');
+app.listen(port, function () {
+  console.log('Example app listening on port... http://localhost:' + port + '');
 });

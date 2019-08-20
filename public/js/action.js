@@ -5,11 +5,11 @@ var dataValue= [];
 
 $(document).ready(function () {
     $.getJSON('http://gd.geobytes.com/GetCityDetails?callback=?', function(data) {
+        console.log(data)
         dataValue.push(data);
     });
 });
 
-console.log(dataValue)
 // Get scroll position
 function getScrollPosition() {
     return {
@@ -103,6 +103,7 @@ window.setInterval(function() {
 $('#play').on('click', function(e) {
     e.preventDefault();
     isPaused = false;
+    // calculate duration
     var fun = userBehaviourFromOnload.length * 100;
     var milliseconds = fun;
     var day, hour, minute, seconds;
