@@ -1,15 +1,15 @@
 var Config = require('./config.js');
-var express = require('express');
-var nunjucks = require('nunjucks');
-var geoip = require('geoip-lite');
+var express = require ('express');
+var nunjucks  = require('nunjucks');
+var { google } = require('googleapis');
 const browser = require('browser-detect');
 var port = 3000;
 var app = express();
 app.use('/public', express.static('public'));
 
-var env = nunjucks.configure(['views/'], {
-  autoescape: true,
-  express: app
+var env = nunjucks.configure(['views/'], { 
+    autoescape: true, 
+    express: app
 });
 
 var OS = require('os');
@@ -28,12 +28,34 @@ var infoValue = {
   "network": OS.networkInterfaces()
 };
 
-var ip = "207.97.227.239";
-var geo = geoip.lookup(ip);
-// console.log(geo)
-// console.log(infoValue)
-// console.log(infoValue.CPUS[0].model)
-// console.log(infoValue.network.wlx502b73d46835[0].address)
+const key = require('./API-Demo-4da662c9dc4a-1.json');
+const scopes = 'https://www.googleapis.com/auth/analytics.readonly'
+const jwt = new google.auth.JWT(key.client_email, null, key.private_key, scopes)
+const view_id = '200520670'
+
+process.env.GOOGLE_APPLICATION_CREDENTIALS = './API-Demo-4da662c9dc4a-1.json'
+
+async function getData() {
+  const defaults = {
+    'auth': jwt,
+    'ids': 'ga:' + view_id,
+  }
+  const response = await jwt.authorize()
+  const result = await google.analytics('v3').data.ga.get({
+    ...defaults,
+    'start-date': '30daysAgo',
+    'end-date': 'today',
+    'dimensions': 'ga:pagePath',
+    'metrics': 'ga:pageviews'
+  })
+  
+  console.log(result.data.rows)
+
+}
+
+getData()
+
+
 
 app.get('/', (req, res) => {
   const result = browser(req.headers['user-agent']);
@@ -42,30 +64,30 @@ app.get('/', (req, res) => {
     page: 'home',
     info: infoValue,
     browserValue: result
-  });
+  });    
 });
 
-app.get('/heatmap', function (req, res) {
+app.get('/heatmap', function(req, res){
   res.render('heatmap.html', {
     title: Config['SEO']['Heatmap']['title'],
     page: 'heatmap',
   });
 });
 
-app.get('/mousemove', function (req, res) {
+app.get('/mousemove', function(req, res){
   res.render('mouse-move-map.html', {
     title: Config['SEO']['MouseMove']['title'],
     page: 'mousemove',
   });
 });
 
-app.get('/googleanalytics', function (req, res) {
+app.get('/googleanalytics', function(req, res){
   res.render('google-analytics.html', {
     title: Config['SEO']['Google']['title'],
     page: 'googleanalytics',
   });
 });
 
-app.listen(port, function () {
-  console.log('Example app listening on port... http://localhost:' + port + '');
+app.listen(port, function() {
+  console.log('Example app listening on port... http://localhost:'+ port +'');
 });
