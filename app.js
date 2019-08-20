@@ -29,11 +29,36 @@ var infoValue = {
 };
 
 const key = require('./API-Demo-4da662c9dc4a-1.json');
-const scopes = 'https://www.googleapis.com/auth/analytics.readonly'
-const jwt = new google.auth.JWT(key.client_email, null, key.private_key, scopes)
-const view_id = '200520670'
+const scopes = 'https://www.googleapis.com/auth/analytics.readonly';
+const jwt = new google.auth.JWT(key.client_email, null, key.private_key, scopes);
+const view_id = '200520670';
 
-process.env.GOOGLE_APPLICATION_CREDENTIALS = './API-Demo-4da662c9dc4a-1.json'
+// const reporting = google.analyticsreporting('v4');
+
+// let getReports = async function (reports) {
+//   await jwt.authorize();
+//   let request = {
+//       'headers': {'Content-Type': 'application/json'}, 'auth': jwt, 'resource': reports
+//   };
+//   return await reporting.reports.batchGet(request);
+// };
+
+// let by_day_report = {
+//   'reportRequests': [
+//       {
+//           'viewId': view_id,
+//           'dateRanges': [{'startDate': '2019-08-01', 'endDate': 'today'}],
+//           'metrics': [{'expression': 'ga:pageviews'}],
+//           'dimensions': [{'name': 'ga:pagePath'}],
+//       }
+//   ]
+// };
+
+// getReports(by_day_report)
+//   .then(response => console.log(response.data.reports[0].data.rows[0].metrics))
+//   .catch(e => console.log(e));
+
+// process.env.GOOGLE_APPLICATION_CREDENTIALS = './API-Demo-4da662c9dc4a-1.json'
 
 async function getData() {
   const defaults = {
@@ -48,9 +73,7 @@ async function getData() {
     'dimensions': 'ga:pagePath',
     'metrics': 'ga:pageviews'
   })
-  
   console.log(result.data.rows)
-
 }
 
 getData()
